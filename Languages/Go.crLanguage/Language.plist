@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CompilerFlags</key>
+	<string></string>
+	<key>CompilerScript</key>
+	<false/>
+	<key>ConsoleType</key>
+	<integer>0</integer>
+	<key>Enabled</key>
+	<true/>
+	<key>FileExtensions</key>
+	<array>
+		<string>go</string>
+	</array>
+	<key>Grammar</key>
+	<string>source.go</string>
+	<key>LanguageBundleVersion</key>
+	<integer>1</integer>
+	<key>LastUsed</key>
+	<date>2015-05-15T19:05:55Z</date>
+	<key>Name</key>
+	<string>Go</string>
+	<key>OutputEncoding</key>
+	<integer>4</integer>
+	<key>RunCommand</key>
+	<string>go run $filename</string>
+	<key>SoftTabs</key>
+	<false/>
+	<key>TabWidth</key>
+	<string>8</string>
+	<key>Templates</key>
+	<array>
+		<dict>
+			<key>Default</key>
+			<integer>1</integer>
+			<key>Extension</key>
+			<string></string>
+			<key>Name</key>
+			<string>main</string>
+			<key>NameOnCreation</key>
+			<false/>
+			<key>Template</key>
+			<string>package main
+
+import "fmt"
+
+func main() {
+	&lt;##&gt;
+}
+</string>
+			<key>TemplateModified</key>
+			<true/>
+		</dict>
+	</array>
+	<key>UseCount</key>
+	<integer>7</integer>
+	<key>uuid</key>
+	<string>C4D60661-A863-4866-9C0E-E9F102276A1E</string>
+</dict>
+</plist>
