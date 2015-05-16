@@ -16,8 +16,8 @@ Also included is a version of the Java language for Java 8 on Mac OS X (fixes is
 
 ## Install
 
-    make install
+    rake install
 
 ## Uninstall
 
-    make uninstall
+    rake uninstall
