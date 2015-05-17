@@ -1,24 +1,30 @@
 require 'rake'
-require 'fileutils'
+require 'rake/clean'
 
-sources = Rake::FileList["Grammars/*.plist", "Languages/*.crLanguage"]
-target = File.expand_path("~/Library/Application Support/CodeRunner")
+TARGET_ROOT = File.expand_path("~/Library/Application Support/CodeRunner")
+SOURCES = Rake::FileList["Grammars/*.plist", "Languages/*.crLanguage"]
 
-sources.each do |s|
-  dest = File.join(target, s)
-  file dest => s do
-    FileUtils.cp_r s, dest, :verbose => true
-  end
-  
-  task :install => [dest]
-end
+desc "Uninstall"
+task :uninstall => :clobber
 
 desc "Install"
 task :install
 
-desc "Uninstall"
-task :uninstall do
-  sources.each { |s| FileUtils.rm_r(File.join(target, s)) }
+task :default => :install
+
+# Destination directories
+directory File.join(TARGET_ROOT, 'Grammars')
+directory File.join(TARGET_ROOT, 'Languages')
+
+task :install => SOURCES.pathmap(File.join(TARGET_ROOT, "%d"))
+
+SOURCES.each do |s|
+  dest = File.join(TARGET_ROOT, s)
+  file dest => s do
+    cp_r(s, dest)
+  end
+  
+  task :install => [dest]
+  CLOBBER.include(dest)
 end
 
-task :default => :install
