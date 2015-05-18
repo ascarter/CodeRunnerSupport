@@ -13,12 +13,10 @@ task :install => OBJECTS
 
 task :default => :install
 
-# Destination directories
-directory File.join(TARGET_ROOT, 'Grammars')
-directory File.join(TARGET_ROOT, 'Languages')
-
 OBJECTS.zip(SOURCES).each do |target, source|
-  file target => [target.pathmap("%d"), source] do
+  target_dir = target.pathmap("%d")
+  directory target_dir
+  file target => [target_dir, source] do
     cp_r(source, target)
   end
   CLOBBER.include(target)
