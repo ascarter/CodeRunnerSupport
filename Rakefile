@@ -3,12 +3,13 @@ require 'rake/clean'
 
 TARGET_ROOT = File.expand_path("~/Library/Application Support/CodeRunner")
 SOURCES = Rake::FileList["Grammars/*.plist", "Languages/*.crLanguage"]
+OBJECTS = SOURCES.pathmap(File.join(TARGET_ROOT, "%p"))
 
 desc "Uninstall"
 task :uninstall => :clobber
 
 desc "Install"
-task :install
+task :install => OBJECTS
 
 task :default => :install
 
@@ -16,15 +17,9 @@ task :default => :install
 directory File.join(TARGET_ROOT, 'Grammars')
 directory File.join(TARGET_ROOT, 'Languages')
 
-task :install => SOURCES.pathmap(File.join(TARGET_ROOT, "%d"))
-
-SOURCES.each do |s|
-  dest = File.join(TARGET_ROOT, s)
-  file dest => s do
-    cp_r(s, dest)
+OBJECTS.zip(SOURCES).each do |target, source|
+  file target => [target.pathmap("%d"), source] do
+    cp_r(source, target)
   end
-  
-  task :install => [dest]
-  CLOBBER.include(dest)
+  CLOBBER.include(target)
 end
-
